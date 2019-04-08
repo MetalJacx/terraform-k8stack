@@ -5,5 +5,4 @@ provider "vcd" {
   url = "${var.vcd_url}"
   vdc = "${var.vcd_vdc}"
   max_retry_timeout = "${var.vcd_max_retry_timeout}"
-  version = "~> 2.1"
 }
