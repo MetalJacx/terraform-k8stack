@@ -1,5 +1,6 @@
 resource "null_resource" "vcd-cli-login" {
   provisioner "local-exec" {
+    when = "create"
     command = <<EOT
     ~/.local/bin/vcd login vpdc.phoenixnap.com ${var.vcd_org} ${var.vcd_user} --password ${var.vcd_pass} --vdc ${var.vcd_vdc} -w -i
     EOT
@@ -16,6 +17,7 @@ resource "vcd_inserted_media" "cp01" {
   eject_force = true
 
   provisioner "local-exec" {
+    when = "create"
     command = <<EOT
     sleep 10s;
     ~/.local/bin/vcd vapp reset -y "${vcd_vapp.clustername.name}" "${vcd_inserted_media.cp01.vm_name}"
@@ -32,6 +34,7 @@ resource "vcd_inserted_media" "cp02" {
   eject_force = true
 
   provisioner "local-exec" {
+    when = "create"
     command = <<EOT
     sleep 10s;
     ~/.local/bin/vcd vapp reset -y "${vcd_vapp.clustername.name}" "${vcd_inserted_media.cp02.vm_name}"
@@ -49,6 +52,7 @@ resource "vcd_inserted_media" "etcd01" {
   eject_force = true
 
   provisioner "local-exec" {
+    when = "create"
     command = <<EOT
     sleep 10s;
     ~/.local/bin/vcd vapp reset -y "${vcd_vapp.clustername.name}" "${vcd_inserted_media.etcd01.vm_name}"
@@ -65,6 +69,7 @@ resource "vcd_inserted_media" "etcd02" {
   eject_force = true
 
   provisioner "local-exec" {
+    when = "create"
     command = <<EOT
     sleep 10s;
     ~/.local/bin/vcd vapp reset -y "${vcd_vapp.clustername.name}" "${vcd_inserted_media.etcd02.vm_name}"
@@ -82,6 +87,7 @@ resource "vcd_inserted_media" "etcd03" {
   eject_force = true
 
   provisioner "local-exec" {
+    when = "create"
     command = <<EOT
     sleep 10s;
     ~/.local/bin/vcd vapp reset -y "${vcd_vapp.clustername.name}" "${vcd_inserted_media.etcd03.vm_name}"
@@ -99,6 +105,7 @@ resource "vcd_inserted_media" "work01" {
   eject_force = true
 
   provisioner "local-exec" {
+    when = "create"
     command = <<EOT
     sleep 10s;
     ~/.local/bin/vcd vapp reset -y "${vcd_vapp.clustername.name}" "${vcd_inserted_media.work01.vm_name}"
@@ -115,6 +122,7 @@ resource "vcd_inserted_media" "work02" {
   eject_force = true
   
   provisioner "local-exec" {
+    when = "create"
     command = <<EOT
     sleep 10s;
     ~/.local/bin/vcd vapp reset -y "${vcd_vapp.clustername.name}" "${vcd_inserted_media.work02.vm_name}"
@@ -131,6 +139,7 @@ resource "vcd_inserted_media" "work03" {
   eject_force = true
 
   provisioner "local-exec" {
+    when = "create"
     command = <<EOT
     sleep 10s;
     ~/.local/bin/vcd vapp reset -y "${vcd_vapp.clustername.name}" "${vcd_inserted_media.work03.vm_name}"
@@ -142,6 +151,7 @@ resource "vcd_inserted_media" "work03" {
 
 resource "null_resource" "vcd-cli-logoff" {
   provisioner "local-exec" {
+    when = "create"
     command = <<EOT
     ~/.local/bin/vcd logout
     EOT
