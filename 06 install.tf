@@ -1,4 +1,4 @@
-resource "null_resource" "cloud-config.yml" {
+resource "null_resource" "cloud-config" {
   provisioner "local-exec" {
       command = <<EOT
       touch cloud-config.yml;
