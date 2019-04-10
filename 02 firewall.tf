@@ -1,3 +1,36 @@
+resource "vcd_firewall_rules" "Global" {
+  edge_gateway = "${var.vcd_edge}"
+  default_action = "drop"
+
+  rule {
+    description      = "ICMP"
+    policy           = "allow"
+    protocol         = "icmp"
+    destination_port = "any"
+    destination_ip   = "any"
+    source_port      = "any"
+    source_ip        = "any"
+  }
+  rule {
+    description      = "DNS-udp"
+    policy           = "allow"
+    protocol         = "udp"
+    destination_port = "53"
+    destination_ip   = "any"
+    source_port      = "any"
+    source_ip        = "any"
+  }
+  rule {
+    description      = "NTP-udp"
+    policy           = "allow"
+    protocol         = "udp"
+    destination_port = "123"
+    destination_ip   = "any"
+    source_port      = "any"
+    source_ip        = "any"
+  }
+}
+
 resource "vcd_firewall_rules" "cp-in" {
   edge_gateway = "${var.vcd_edge}"
   default_action = "drop"
