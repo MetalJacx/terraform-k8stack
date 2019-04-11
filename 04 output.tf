@@ -3,8 +3,7 @@ resource "null_resource" "delay" {
     command = "sleep 60s"
   }
 
-  depends_on = ["null_resource.vcd-cli-logoff"]
-}
+  }
 
 
 output "cp" {
