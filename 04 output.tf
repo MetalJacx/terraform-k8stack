@@ -3,8 +3,7 @@ resource "null_resource" "delay" {
     command = "sleep 60s"
   }
 
-  }
-
+}
 
 output "cp" {
   value = "${concat(list("${vcd_vapp_vm.cp.*.name}"), list("${vcd_vapp_vm.cp.*.ip}"))}"
