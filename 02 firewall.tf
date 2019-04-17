@@ -1,7 +1,7 @@
 resource "vcd_firewall_rules" "Global" {
   edge_gateway = "${var.vcd_edge}"
   default_action = "drop"
-
+  
   rule {
     description      = "ICMP"
     policy           = "allow"
@@ -34,7 +34,7 @@ resource "vcd_firewall_rules" "Global" {
 resource "vcd_firewall_rules" "cp-in" {
   edge_gateway = "${var.vcd_edge}"
   default_action = "drop"
-
+ 
   rule {
     description      = "HTTP-CP Ingress Controller"
     policy           = "allow"
@@ -121,7 +121,7 @@ resource "vcd_firewall_rules" "cp-in" {
 resource "vcd_firewall_rules" "cp-out" {
   edge_gateway = "${var.vcd_edge}"
   default_action = "drop"
-
+  
   rule {
     description      = "CP-Rancher Rancher Agent"
     policy           = "allow"
@@ -181,7 +181,7 @@ resource "vcd_firewall_rules" "cp-out" {
 resource "vcd_firewall_rules" "snat-out" {
   edge_gateway = "${var.vcd_edge}"
   default_action = "drop"
-
+  
   rule {
     description      = "CP-Http"
     policy           = "allow"
@@ -258,7 +258,7 @@ resource "vcd_snat" "work-out" {
 resource "vcd_firewall_rules" "etcd-in" {
   edge_gateway = "${var.vcd_edge}"
   default_action = "drop"
-
+  
   rule {
     description      = "Rancher-Etcd Docker daemon TLS Port"
     policy           = "allow"
@@ -309,7 +309,7 @@ resource "vcd_firewall_rules" "etcd-in" {
 resource "vcd_firewall_rules" "etcd-out" {
   edge_gateway = "${var.vcd_edge}"
   default_action = "drop"
-
+ 
   rule {
     description      = "Etcd-Rancher Rancher Agent"
     policy           = "allow"
@@ -350,7 +350,7 @@ resource "vcd_firewall_rules" "etcd-out" {
 resource "vcd_firewall_rules" "work-in" {
   edge_gateway = "${var.vcd_edge}"
   default_action = "drop"
-
+  
   rule {
     description      = "HTTP-Work Ingress Controller"
     policy           = "allow"
@@ -428,7 +428,7 @@ resource "vcd_firewall_rules" "work-in" {
 resource "vcd_firewall_rules" "work-out" {
   edge_gateway = "${var.vcd_edge}"
   default_action = "drop"
-
+  
   rule {
     description      = "Work-Rancher Rancher Agent"
     policy           = "allow"

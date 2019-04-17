@@ -97,7 +97,3 @@ variable "node_work" {
 variable "cluster_name" {
   description = "Name of your k8s cluster"
 }
-
-variable "ssh_rsa" {
-  description = "SSH Key for RancherOS Install"
-}

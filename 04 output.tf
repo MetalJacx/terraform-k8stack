@@ -2,6 +2,7 @@ resource "null_resource" "delay" {
   provisioner "local-exec"{
     command = "sleep 60s"
   }
+  depends_on = ["vcd_vapp_vm.work"]
 
 }
 

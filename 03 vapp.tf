@@ -5,7 +5,7 @@ resource "vcd_vapp" "clustername" {
 }
 
 resource "vcd_vapp_vm" "cp" {
-    count = 2
+    count = 1
     vapp_name = "${vcd_vapp.clustername.name}"
     name = "${var.node_cp}-${count.index}"
     catalog_name = "${var.vcd_catalog}"
@@ -21,7 +21,7 @@ resource "vcd_vapp_vm" "cp" {
 }
 
 resource "vcd_vapp_vm" "etcd" {
-    count = 3
+    count = 1
     vapp_name = "${vcd_vapp.clustername.name}"
     name = "${var.node_etcd}-${count.index}"
     catalog_name = "${var.vcd_catalog}"
@@ -37,7 +37,7 @@ resource "vcd_vapp_vm" "etcd" {
 }
 
 resource "vcd_vapp_vm" "work" {
-    count = 3
+    count = 1
     vapp_name = "${vcd_vapp.clustername.name}"
     name = "${var.node_work}-${count.index}"
     catalog_name = "${var.vcd_catalog}"
