@@ -54,3 +54,93 @@ resource "vcd_network_routed" "work-network" {
   }
   depends_on = ["vcd_network_routed.etcd-network"]
 }
+
+resource "vcd_edgegateway_vpn" "Dev" {
+  count = "${var.vpn_enable == "true" ? 1: 0}"
+  edge_gateway        = "${var.vcd_edge}"
+  name                = "${var.vcd_vdc}-to-${var.vpn_vdc}"
+  description         = "VPN built by terraform"
+  encryption_protocol = "AES256"
+  mtu                 = 1400
+  peer_id             = "${var.vpn_edge_ip}"
+  peer_ip_address     = "${var.vpn_edge_ip}"
+  local_id            = "${var.net_edge_ip}"
+  local_ip_address    = "${var.net_edge_ip}"
+  shared_secret       = "${var.vpn_secret}"
+
+  peer_subnets {
+    peer_subnet_name    = "Rancher"
+    peer_subnet_gateway = "${cidrhost("${var.vpn_rancher_cidr}", 1)}"
+    peer_subnet_mask    = "${cidrnetmask("${var.vpn_rancher_cidr}")}"
+  }
+
+  peer_subnets {
+    peer_subnet_name    = "JumpBoxes"
+    peer_subnet_gateway = "${cidrhost("${var.vpn_jump_cidr}", 1)}"
+    peer_subnet_mask    = "${cidrnetmask("${var.vpn_jump_cidr}")}"
+  }
+
+  local_subnets {
+    local_subnet_name    = "${var.net_cp_name}"
+    local_subnet_gateway = "${cidrhost("${var.net_cp_cidr}", 1)}"
+    local_subnet_mask    = "${cidrnetmask("${var.net_cp_cidr}")}"
+  }
+
+  local_subnets {
+    local_subnet_name    = "${var.net_etcd_name}"
+    local_subnet_gateway = "${cidrhost("${var.net_etcd_cidr}", 1)}"
+    local_subnet_mask    = "${cidrnetmask("${var.net_etcd_cidr}")}"
+  }
+  local_subnets {
+    local_subnet_name    = "${var.net_work_name}"
+    local_subnet_gateway = "${cidrhost("${var.net_work_cidr}", 1)}"
+    local_subnet_mask    = "${cidrnetmask("${var.net_work_cidr}")}"
+  }
+
+  depends_on = ["vcd_network_routed.work-network"]
+}
+
+resource "vcd_edgegateway_vpn" "mgmt" {
+  count = "${var.vpn_enable == "true" ? 1: 0}"
+  vdc                 = "${var.vpn_vdc}"
+  edge_gateway        = "${var.vpn_edge}"
+  name                = "${var.vpn_vdc}-to-${var.vcd_vdc}"
+  description         = "VPN built by terraform"
+  encryption_protocol = "AES256"
+  mtu                 = 1400
+  peer_id             = "${var.net_edge_ip}"
+  peer_ip_address     = "${var.net_edge_ip}"
+  local_id            = "${var.vpn_edge_ip}"
+  local_ip_address    = "${var.vpn_edge_ip}"
+  shared_secret       = "${var.vpn_secret}"
+
+  local_subnets {
+    local_subnet_name    = "Rancher"
+    local_subnet_gateway = "${cidrhost("${var.vpn_rancher_cidr}", 1)}"
+    local_subnet_mask    = "${cidrnetmask("${var.vpn_rancher_cidr}")}"
+  }
+
+  local_subnets {
+    local_subnet_name    = "JumpBoxes"
+    local_subnet_gateway = "${cidrhost("${var.vpn_jump_cidr}", 1)}"
+    local_subnet_mask    = "${cidrnetmask("${var.vpn_jump_cidr}")}"
+  }
+
+  peer_subnets {
+    peer_subnet_name    = "${var.net_cp_name}"
+    peer_subnet_gateway = "${cidrhost("${var.net_cp_cidr}", 1)}"
+    peer_subnet_mask    = "${cidrnetmask("${var.net_cp_cidr}")}"
+  }
+
+  peer_subnets {
+    peer_subnet_name    = "${var.net_etcd_name}"
+    peer_subnet_gateway = "${cidrhost("${var.net_etcd_cidr}", 1)}"
+    peer_subnet_mask    = "${cidrnetmask("${var.net_etcd_cidr}")}"
+  }
+  peer_subnets {
+    peer_subnet_name    = "${var.net_work_name}"
+    peer_subnet_gateway = "${cidrhost("${var.net_work_cidr}", 1)}"
+    peer_subnet_mask    = "${cidrnetmask("${var.net_work_cidr}")}"
+  }
+  depends_on = ["vcd_network_routed.work-network"]
+}

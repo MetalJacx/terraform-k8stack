@@ -35,6 +35,10 @@ variable "vcd_template" {
     description = "vCD Template Name"
 }
 
+variable "net_edge_ip" {
+  description = "The edge's uplink ip"
+}
+
 variable "net_cp_name" {
   description = "Network Name of ControlPlane"
 }
@@ -97,3 +101,32 @@ variable "node_work" {
 variable "cluster_name" {
   description = "Name of your k8s cluster"
 }
+variable "vpn_edge" {
+  description = "VPN's target connected edge"
+}
+
+variable "vpn_vdc" {
+  description = "The virtual Datacenter that target VPN is a part of"
+}
+
+variable "vpn_edge_ip" {
+  description = "Rancher's Ip for VPN connections"
+}
+
+variable "vpn_secret" {
+  description = "Secret Password to use between the two Edges for VPN"
+}
+
+variable "vpn_enable" {
+  description = "Do you need a VPN setup"
+  default = "false"
+}
+
+variable "vpn_rancher_cidr" {
+  description = "Local CIDR of the Rancher Management Subnet"
+}
+
+variable "vpn_jump_cidr" {
+  description = "Local CIDR of the jumpbox Subnet"
+}
+
