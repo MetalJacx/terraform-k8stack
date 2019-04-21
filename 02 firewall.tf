@@ -29,6 +29,15 @@ resource "vcd_firewall_rules" "Global" {
     source_port      = "any"
     source_ip        = "any"
   }
+  rule {
+    description      = "SSH-JMP"
+    policy           = "allow"
+    protocol         = "tcp"
+    destination_port = "22"
+    destination_ip   = "any"
+    source_port      = "any"
+    source_ip        = "${var.vpn_jump_cidr}"
+  }  
 }
 
 resource "vcd_firewall_rules" "cp-in" {
