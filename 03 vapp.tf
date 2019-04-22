@@ -15,6 +15,10 @@ resource "vcd_vapp_vm" "cp" {
     cpu_cores = 1
 
     network_name = "${vcd_network_routed.cp-network.name}"
+
+    provisioner "local-exec" {
+      command = "echo '${self.ip}'"
+    }
     
     depends_on = ["vcd_vapp.clustername"]
 }
@@ -30,7 +34,11 @@ resource "vcd_vapp_vm" "etcd" {
     cpu_cores = 1
 
     network_name = "${vcd_network_routed.etcd-network.name}"
-    
+
+    provisioner "local-exec" {
+      command = "echo '${self.ip}'"
+    }
+
     depends_on = ["vcd_vapp_vm.cp"]
 }
 
@@ -45,6 +53,10 @@ resource "vcd_vapp_vm" "work" {
     cpu_cores = 1
 
     network_name = "${vcd_network_routed.work-network.name}"
+
+    provisioner "local-exec" {
+      command = "echo '${self.ip}'"
+    }
     
     depends_on = ["vcd_vapp_vm.etcd"]
 }
