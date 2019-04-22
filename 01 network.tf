@@ -10,10 +10,10 @@ resource "vcd_network_routed" "cp-network" {
       end_address = "${cidrhost("${var.net_cp_cidr}", 100)}"
   }
 
-  static_ip_pool {
-      start_address = "${cidrhost("${var.net_cp_cidr}", 101)}"
-      end_address = "${cidrhost("${var.net_cp_cidr}", 150)}"
-  }
+  # static_ip_pool {
+  #     start_address = "${cidrhost("${var.net_cp_cidr}", 101)}"
+  #     end_address = "${cidrhost("${var.net_cp_cidr}", 150)}"
+  # }
 }
 
 resource "vcd_network_routed" "etcd-network" {
@@ -28,10 +28,10 @@ resource "vcd_network_routed" "etcd-network" {
       end_address = "${cidrhost("${var.net_etcd_cidr}", 100)}"
   }
 
-  static_ip_pool {
-      start_address = "${cidrhost("${var.net_etcd_cidr}", 101)}"
-      end_address = "${cidrhost("${var.net_etcd_cidr}", 150)}"
-  }
+  # static_ip_pool {
+  #     start_address = "${cidrhost("${var.net_etcd_cidr}", 101)}"
+  #     end_address = "${cidrhost("${var.net_etcd_cidr}", 150)}"
+  # }
 
   depends_on = ["vcd_network_routed.cp-network"]
 }
@@ -48,10 +48,11 @@ resource "vcd_network_routed" "work-network" {
       end_address = "${cidrhost("${var.net_work_cidr}", 100)}"
   }
 
-  static_ip_pool {
-      start_address = "${cidrhost("${var.net_work_cidr}", 101)}"
-      end_address = "${cidrhost("${var.net_work_cidr}", 150)}"
-  }
+  # static_ip_pool {
+  #     start_address = "${cidrhost("${var.net_work_cidr}", 101)}"
+  #     end_address = "${cidrhost("${var.net_work_cidr}", 150)}"
+  # }
+  
   depends_on = ["vcd_network_routed.etcd-network"]
 }
 
