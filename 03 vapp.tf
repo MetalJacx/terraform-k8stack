@@ -15,12 +15,16 @@ resource "vcd_vapp_vm" "cp" {
     cpu_cores = 1
 
     network_name = "${vcd_network_routed.cp-network.name}"
+    ip = "allocated"
 
-    provisioner "local-exec" {
-      command = <<EOT
-      sleep 180s;
-      echo '${self.ip}';
-      EOT
+    provisioner "ansible" {
+      plays {
+          playbook = {
+              file_path = "${path.module}/../ansible-data/playbooks/ps_k8s.yml"
+              roles_path = ["${path.module}/../ansible-data/roles"]
+          }
+      }
+      hosts = ["installdockeroncp"]
     }
     
     depends_on = ["vcd_vapp.clustername"]
@@ -37,6 +41,7 @@ resource "vcd_vapp_vm" "etcd" {
     cpu_cores = 1
 
     network_name = "${vcd_network_routed.etcd-network.name}"
+    ip = "allocated"
 
     provisioner "local-exec" {
       command = <<EOT
@@ -59,6 +64,7 @@ resource "vcd_vapp_vm" "work" {
     cpu_cores = 1
 
     network_name = "${vcd_network_routed.work-network.name}"
+    ip = "allocated"
 
     provisioner "local-exec" {
       command = <<EOT
