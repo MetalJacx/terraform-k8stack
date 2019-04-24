@@ -17,7 +17,10 @@ resource "vcd_vapp_vm" "cp" {
     network_name = "${vcd_network_routed.cp-network.name}"
 
     provisioner "local-exec" {
-      command = "echo '${self.ip}'"
+      command = <<EOT
+      sleep 180s;
+      echo '${self.ip}';
+      EOT
     }
     
     depends_on = ["vcd_vapp.clustername"]
@@ -36,7 +39,10 @@ resource "vcd_vapp_vm" "etcd" {
     network_name = "${vcd_network_routed.etcd-network.name}"
 
     provisioner "local-exec" {
-      command = "echo '${self.ip}'"
+      command = <<EOT
+      sleep 180s;
+      echo '${self.ip}';
+      EOT
     }
 
     depends_on = ["vcd_vapp_vm.cp"]
@@ -55,7 +61,10 @@ resource "vcd_vapp_vm" "work" {
     network_name = "${vcd_network_routed.work-network.name}"
 
     provisioner "local-exec" {
-      command = "echo '${self.ip}'"
+      command = <<EOT
+      sleep 180s;
+      echo '${self.ip}';
+      EOT
     }
     
     depends_on = ["vcd_vapp_vm.etcd"]
