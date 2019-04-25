@@ -19,7 +19,7 @@ resource "vcd_vapp_vm" "cp" {
 
     provisioner "local-exec" {
       command = <<EOT
-      sleep 60s;
+      sleep 30s;
       echo '${self.ip}';
       EOT
     }
@@ -28,13 +28,6 @@ resource "vcd_vapp_vm" "cp" {
         host = "${self.ip}"
         user = "${var.vcd_template_username}"
         password = "${var.vcd_template_pass}"
-    }
-
-    provisioner "remote-exec" {
-        inline = [
-            "echo VAR| sudo -S apt-get update",
-            "sudo apt-get -y install python"
-        ]
     }
 
     provisioner "ansible" {
@@ -47,6 +40,7 @@ resource "vcd_vapp_vm" "cp" {
            extra_vars = {
              ansible_become_pass = "${var.vcd_template_pass}"
              ansible_ssh_pass = "${var.vcd_template_pass}"
+             ansible_python_interpreter = "/usr/bin/python3"
            }
           verbose = true
       }
