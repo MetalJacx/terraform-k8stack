@@ -27,12 +27,12 @@ resource "vcd_vapp_vm" "cp" {
     connection {
         host = "${self.ip}"
         user = "k8admin"
-        password = "G0ldm00n!"
+        password = "VAR"
     }
 
     provisioner "remote-exec" {
         inline = [
-            "echo G0ldm00n! | sudo -S apt-get update",
+            "echo VAR| sudo -S apt-get update",
             "sudo apt-get -y install python"
         ]
     }
