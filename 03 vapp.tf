@@ -45,8 +45,8 @@ resource "vcd_vapp_vm" "cp" {
           }
           hosts = ["installdockeroncp"]
            extra_vars = {
-             ansible_become_pass = "G0ldm00n!"
-             ansible_ssh_pass = "G0ldm00n!"
+             ansible_become_pass = "VAR"
+             ansible_ssh_pass = "VAR"
            }
           verbose = true
       }
