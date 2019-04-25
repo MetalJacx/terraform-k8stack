@@ -1,6 +1,10 @@
 - hosts: all
   become: yes
 
+  var:
+    docker:
+      doc_user: "{{ doc_user }}"
+
   roles:
     - docker
   

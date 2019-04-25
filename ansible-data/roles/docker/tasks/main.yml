@@ -14,7 +14,13 @@
     state: present
     filename: docker
 
-- name: "APT - install 'docker-ce'"
+- name: "APT - install 'docker-ce' 'docker-ce-cli' 'containerd.io'"
   apt:
-    name: "docker-ce"
+    name: ['docker-ce', 'docker-ce-cli', 'containerd.io']
     update_cache: yes
+
+- name: "user - Adding users to docker group"
+  user: 
+    name: {{ doc_user }}
+    append: yes
+    groups: docker
