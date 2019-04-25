@@ -5,7 +5,7 @@ resource "vcd_vapp" "clustername" {
 }
 
 resource "vcd_vapp_vm" "cp" {
-    count = 2
+    count = 1
     vapp_name = "${vcd_vapp.clustername.name}"
     name = "${var.node_cp}-${count.index}"
     catalog_name = "${var.vcd_catalog}"
@@ -32,7 +32,8 @@ resource "vcd_vapp_vm" "cp" {
 
     provisioner "remote-exec" {
         inline = [
-            "echo hello world"
+            "echo G0ldm00n! | sudo -S apt-get update",
+            "sudo apt-get -y install python"
         ]
     }
 
@@ -43,13 +44,10 @@ resource "vcd_vapp_vm" "cp" {
               roles_path = ["${path.module}/ansible-data/roles"]
           }
           hosts = ["installdockeroncp"]
-          extra_vars = {
-              extra = {
-                  variables = {
-                      ansible_become_pass = "G0ldm00n!"
-                  }
-              }
-          }    
+           extra_vars = {
+             ansible_become_pass = "G0ldm00n!"
+             ansible_ssh_pass = "G0ldm00n!"
+           }
           verbose = true
       }
       ansible_ssh_settings {
@@ -62,7 +60,7 @@ resource "vcd_vapp_vm" "cp" {
 }
 
 resource "vcd_vapp_vm" "etcd" {
-    count = 1
+    count = 0
     vapp_name = "${vcd_vapp.clustername.name}"
     name = "${var.node_etcd}-${count.index}"
     catalog_name = "${var.vcd_catalog}"
@@ -85,7 +83,7 @@ resource "vcd_vapp_vm" "etcd" {
 }
 
 resource "vcd_vapp_vm" "work" {
-    count = 1
+    count = 0
     vapp_name = "${vcd_vapp.clustername.name}"
     name = "${var.node_work}-${count.index}"
     catalog_name = "${var.vcd_catalog}"
