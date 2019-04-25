@@ -41,6 +41,7 @@ resource "vcd_vapp_vm" "cp" {
              ansible_become_pass = "${var.vcd_template_pass}"
              ansible_ssh_pass = "${var.vcd_template_pass}"
              ansible_python_interpreter = "/usr/bin/python3"
+             doc_user = "${var.vcd_template_username}"
            }
           verbose = true
       }

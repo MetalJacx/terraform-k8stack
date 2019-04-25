@@ -19,8 +19,8 @@
     name: ['docker-ce', 'docker-ce-cli', 'containerd.io']
     update_cache: yes
 
-- name: "user - Adding users to docker group"
+- name: "USER - Adding users to docker group"
   user: 
-    name: {{ doc_user }}
-    append: yes
+    name: "{{ doc_user }}"
+    append: True
     groups: docker
