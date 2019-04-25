@@ -43,6 +43,7 @@ resource "vcd_vapp_vm" "cp" {
              ansible_python_interpreter = "/usr/bin/python3"
              doc_user = "${var.vcd_template_username}"
              node_run_cmd = "${var.node_run_cmd} --controlplane"
+             node_hostname = "${var.node_cp}-${count.index}"
            }
           verbose = true
       }
@@ -94,6 +95,7 @@ resource "vcd_vapp_vm" "etcd" {
              ansible_python_interpreter = "/usr/bin/python3"
              doc_user = "${var.vcd_template_username}"
              node_run_cmd = "${var.node_run_cmd} --etcd"
+              node_hostname = "${var.node_etcd}-${count.index}"
            }
           verbose = true
       }
@@ -145,6 +147,7 @@ resource "vcd_vapp_vm" "work" {
              ansible_python_interpreter = "/usr/bin/python3"
              doc_user = "${var.vcd_template_username}"
              node_run_cmd = "${var.node_run_cmd} --worker"
+             node_hostname = "${var.node_work}-${count.index}"
            }
           verbose = true
       }
