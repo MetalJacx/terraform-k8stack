@@ -153,3 +153,8 @@ variable "vcd_template_pass" {
   description = "password for template user"
 }
 
+variable "node_run_cmd" {
+  description = "Command to add node configuration minus the node roles"
+}
+
+
