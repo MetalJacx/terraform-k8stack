@@ -26,8 +26,8 @@ resource "vcd_vapp_vm" "cp" {
 
     connection {
         host = "${self.ip}"
-        user = "k8admin"
-        password = "VAR"
+        user = "${var.vcd_template_username}"
+        password = "${var.vcd_template_pass}"
     }
 
     provisioner "remote-exec" {
@@ -45,8 +45,8 @@ resource "vcd_vapp_vm" "cp" {
           }
           hosts = ["installdockeroncp"]
            extra_vars = {
-             ansible_become_pass = "VAR"
-             ansible_ssh_pass = "VAR"
+             ansible_become_pass = "${var.vcd_template_pass}"
+             ansible_ssh_pass = "${var.vcd_template_pass}"
            }
           verbose = true
       }

@@ -130,3 +130,26 @@ variable "vpn_jump_cidr" {
   description = "Local CIDR of the jumpbox Subnet"
 }
 
+variable "node_cp_cnt" {
+  description = "Number of deployed controlplanes"
+  default = 1
+}
+
+variable "node_etcd_cnt" {
+  description = "Number of deployed controlplanes"
+  default = 1
+}
+
+variable "node_work_cnt" {
+  description = "Number of deployed controlplanes"
+  default = 1
+}
+
+variable "vcd_template_username" {
+  description = "username for connecting to template os"
+}
+
+variable "vcd_template_pass" {
+  description = "password for template user"
+}
+
