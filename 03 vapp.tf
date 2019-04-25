@@ -5,7 +5,7 @@ resource "vcd_vapp" "clustername" {
 }
 
 resource "vcd_vapp_vm" "cp" {
-    count = 1
+    count = 2
     vapp_name = "${vcd_vapp.clustername.name}"
     name = "${var.node_cp}-${count.index}"
     catalog_name = "${var.vcd_catalog}"
@@ -17,14 +17,45 @@ resource "vcd_vapp_vm" "cp" {
     network_name = "${vcd_network_routed.cp-network.name}"
     ip = "allocated"
 
+    provisioner "local-exec" {
+      command = <<EOT
+      sleep 60s;
+      echo '${self.ip}';
+      EOT
+    }
+
+    connection {
+        host = "${self.ip}"
+        user = "k8admin"
+        password = "G0ldm00n!"
+    }
+
+    provisioner "remote-exec" {
+        inline = [
+            "echo hello world"
+        ]
+    }
+
     provisioner "ansible" {
       plays {
           playbook = {
-              file_path = "${path.module}/../ansible-data/playbooks/ps_k8s.yml"
-              roles_path = ["${path.module}/../ansible-data/roles"]
+              file_path = "${path.module}/ansible-data/playbooks/ps_k8s.yml"
+              roles_path = ["${path.module}/ansible-data/roles"]
           }
+          hosts = ["installdockeroncp"]
+          extra_vars = {
+              extra = {
+                  variables = {
+                      ansible_become_pass = "G0ldm00n!"
+                  }
+              }
+          }    
+          verbose = true
       }
-      hosts = ["installdockeroncp"]
+      ansible_ssh_settings {
+          insecure_no_strict_host_key_checking = "true"
+      }
+      
     }
     
     depends_on = ["vcd_vapp.clustername"]
