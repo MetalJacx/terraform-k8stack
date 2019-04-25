@@ -4,7 +4,10 @@
   vars:
     docker:
       doc_user: "{{ doc_user }}"
+    rancher:
+      node_run_cmd: "{{node_run_cmd}}"
 
   roles:
     - docker
+    - rancher
   

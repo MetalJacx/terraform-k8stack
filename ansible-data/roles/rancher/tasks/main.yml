@@ -1,0 +1,2 @@
+- name: "RAW - Install Container Node"
+  raw: "{{ node_run_cmd }}"
