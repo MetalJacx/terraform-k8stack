@@ -108,7 +108,7 @@ resource "vcd_firewall_rules" "cp-in" {
     source_ip        = "${var.net_work_cidr}"
   }
   rule {
-    description      = "Node Port Range"
+    description      = "NP UDP Range CP"
     policy           = "allow"
     protocol         = "udp"
     destination_port = "30000-32767"
@@ -117,7 +117,7 @@ resource "vcd_firewall_rules" "cp-in" {
     source_ip        = "any"
   }
   rule {
-    description      = "Node Port Range"
+    description      = "NP TCP Range CP"
     policy           = "allow"
     protocol         = "tcp"
     destination_port = "30000-32767"
@@ -415,7 +415,7 @@ resource "vcd_firewall_rules" "work-in" {
     source_ip        = "${var.net_cp_cidr}"
   }
   rule {
-    description      = "Node Port Range"
+    description      = "NP UDP Range WORK"
     policy           = "allow"
     protocol         = "udp"
     destination_port = "30000-32767"
@@ -424,7 +424,7 @@ resource "vcd_firewall_rules" "work-in" {
     source_ip        = "any"
   }
   rule {
-    description      = "Node Port Range"
+    description      = "NP TCP Range WORK"
     policy           = "allow"
     protocol         = "tcp"
     destination_port = "30000-32767"
