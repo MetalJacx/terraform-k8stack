@@ -5,8 +5,10 @@
 
 ## Tools and Referances
 [`Terraform`](https://www.terraform.io/downloads.html) - Installed locally
-  [Terraform.vCD] (https://github.com/terraform-providers/terraform-provider-vcd)
-  [Terraform.ansible](https://github.com/radekg/terraform-provisioner-ansible)
+
+['Terraform.vCD'](https://github.com/terraform-providers/terraform-provider-vcd)
+
+['Terraform.ansible'](https://github.com/radekg/terraform-provisioner-ansible)
 [`Ansible`](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html?extIdCarryOver=true&sc_cid=701f2000001OH7YAAW#latest-releases-via-apt-ubuntu) - Installed locally
 
 ## Folder Structure
