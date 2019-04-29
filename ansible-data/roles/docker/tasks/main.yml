@@ -1,0 +1,26 @@
+- name: "APT - install misc packages"
+  apt:
+    name: ['gnupg-agent', 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common']
+    update_cache: yes
+    
+- name: "APT - Add Docker GPG key"
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: "APT - Add Docker repository"
+  apt_repository:
+    repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"
+    state: present
+    filename: docker
+
+- name: "APT - install 'docker-ce' 'docker-ce-cli' 'containerd.io'"
+  apt:
+    name: ['docker-ce', 'docker-ce-cli', 'containerd.io']
+    update_cache: yes
+
+- name: "USER - Adding users to docker group"
+  user: 
+    name: "{{ doc_user }}"
+    append: True
+    groups: docker
