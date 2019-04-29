@@ -11,13 +11,28 @@ The purpose of this was for to create a repeatable process of deploying a kubern
 
 ## Folder Structure
 
-```bash
+```
 ├── .terraform.d                                    <--- Created During Ansible Creation
 │   ├── plugins
-│   │   ├── terraform-provider-vcd_v#               <--- Terraform vCD Plugin
-│   │   ├── terraform-provisioner-ansible_v#        <--- Terraform Ansible Plugin
-├── Deployments
-
+│       ├── terraform-provider-vcd_v#               <--- Terraform vCD Plugin
+│       ├── terraform-provisioner-ansible_v#        <--- Terraform Ansible Plugin
+|
+└── Deployments
+    ├── Production - Phx
+    │   ├── *.tf
+    │   ├── *.tfvars
+    │   ├── .terrform                               <--- Create when initalized
+    │   └── ansible-date                            <--- Folder Structure for [ansible](https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html)
+    │       ├── playbooks
+    │       │   ├── ps_k8s.yml                      <--- Define variables and calls rolls  
+    │       └── roles
+    │           ├── docker
+    │           │   ├── meta
+    │           │   │   ├── main.yml                <--- Dependancies for roels 
+    │           │   ├── tasks
+    │           │   │   ├── main.yml                <--- Tasks that will Run
+    │           └── <addition roles>
+    ├── <Addition Deployments>
 ```
 
 ```
