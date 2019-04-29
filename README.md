@@ -1,13 +1,16 @@
 # Automated Rancher Node Deployment in vCD
 
 ## General Information
-The purpose of this was for to create a repeatable process of deploying a kubernetes cluster to be connected up with Rancher v2. 
+The purpose of this was for to create a repeatable process of deploying a kubernetes cluster to be connected up with Rancher v2 in vCLoud Director. This is currently node side only at the moment. I was orignally going to include the rancher side, but two things. It may be control by a different team and current vCD plugin VPN handling will destroy other VPNs on the edge already created. 
 
 ## Tools and Referances
 - [`Terraform`](https://www.terraform.io/downloads.html) - v11.3 - Installed Locally
   - [`Terraform.vCD`](https://github.com/terraform-providers/terraform-provider-vcd) - Plugin
   - [`Terraform.ansible`](https://github.com/radekg/terraform-provisioner-ansible) - Plugin
 - [`Ansible`](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html?extIdCarryOver=true&sc_cid=701f2000001OH7YAAW#latest-releases-via-apt-ubuntu) - Installed locally
+- [`GO`] (https://golang.org/dl/) - Used to create the two needed plugins for terraform
+- `Ubuntu` - As base image in catalog
+- [`Rancher`](https://rancher.com/) - v2.2 Installed Remotely
 
 ## Folder Structure
 
@@ -30,10 +33,18 @@ The purpose of this was for to create a repeatable process of deploying a kubern
     │           │   ├── meta
     │           │   │   ├── main.yml                <--- Dependancies for roels 
     │           │   ├── tasks
-    │           │   │   ├── main.yml                <--- Tasks that will Run
+    │           │       ├── main.yml                <--- Tasks that will Run
     │           └── <addition roles>
     ├── <Addition Deployments>
 ```
+## Variable File
+
+`vCD Provider Info - Case Sensitive` - Basic vCD Provider Infomarmation (terraform.vcd)
+`Catalog Image Info` - Location of Base image to build off  (terraform.vcd)
+`Rancher Info` - Rancher Instance conencting to and the node run command - LEAVE ROLE OFF (terraform)
+`Cluster info` - Naming and IP for Edge and to use for SNAT. Note: I plan to make snat optional and add proxy option in the future
+`Controlplane/ETCD/WORKER info` - Naming and Network setting for each node components
+`VPN - Connection to Rancher and JumpBox` - Not production ready as kept deleting alreday define roles. Suggest manually setting up VPN for now, leveraging api/vcd-cli, or just good old plain routing.
 
 ```
 #-------------------------------------------#
