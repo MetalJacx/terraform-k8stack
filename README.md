@@ -8,7 +8,7 @@ The purpose of this was for to create a repeatable process of deploying a kubern
   - [`Terraform.vCD`](https://github.com/terraform-providers/terraform-provider-vcd) - Plugin
   - [`Terraform.ansible`](https://github.com/radekg/terraform-provisioner-ansible) - Plugin
 - [`Ansible`](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html?extIdCarryOver=true&sc_cid=701f2000001OH7YAAW#latest-releases-via-apt-ubuntu) - Installed locally
-- [`GO`] (https://golang.org/dl/) - Used to create the two needed plugins for terraform
+- [`GO`](https://golang.org/dl/) - Used to create the two needed plugins for terraform
 - `Ubuntu` - As base image in catalog
 - [`Rancher`](https://rancher.com/) - v2.2 Installed Remotely
 
