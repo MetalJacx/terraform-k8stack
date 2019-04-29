@@ -1,7 +1,9 @@
 # Automated Rancher Node Deployment in vCD
 
 ## General Information
-The purpose of this was for to create a repeatable process of deploying a kubernetes cluster to be connected up with Rancher v2 in vCLoud Director. This is currently node side only at the moment. I was orignally going to include the rancher side, but two things. It may be control by a different team and current vCD plugin VPN handling will destroy other VPNs on the edge already created. 
+Create a repeatable process of deploying a kubernetes node cluster for use with Rancher v2. This is for VMware vCLoud Director deployment and only currently handles the node side of deployment.
+
+At first I was going to include the rancher side as well, but two things. It may be control by a different team and thier maybe only one instance. So putting the process into one automated deployment didn't make sense.Second the current VPN handling of the terraform vCD plugin will destroy other VPNs already created on the edge. 
 
 ## Tools and Referances
 - [`Terraform`](https://www.terraform.io/downloads.html) - v11.3 - Installed Locally
@@ -41,7 +43,7 @@ The purpose of this was for to create a repeatable process of deploying a kubern
 
 - `vCD Provider Info - Case Sensitive` - Basic vCD Provider Infomarmation (terraform.vcd)
 - `Catalog Image Info` - Location of Base image to build off  (terraform.vcd)
-- `Rancher Info` - Rancher Instance conencting to and the node run command - LEAVE ROLE OFF (terraform)
+- `Rancher Info` - Rancher Instance connecting to and the node run command - LEAVE ROLE OFF (terraform)
 - `Cluster info` - Naming and IP for Edge and to use for SNAT. Note: I plan to make snat optional and add proxy option in the future
 - `Controlplane/ETCD/WORKER info` - Naming and Network setting for each node components
 - `VPN - Connection to Rancher and JumpBox` - Not production ready as kept deleting alreday define roles. Suggest manually setting up VPN for now, leveraging api/vcd-cli, or just good old plain routing.
