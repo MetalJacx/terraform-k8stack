@@ -39,13 +39,15 @@ The purpose of this was for to create a repeatable process of deploying a kubern
 ```
 ## Variable File
 
-`vCD Provider Info - Case Sensitive` - Basic vCD Provider Infomarmation (terraform.vcd)
-`Catalog Image Info` - Location of Base image to build off  (terraform.vcd)
-`Rancher Info` - Rancher Instance conencting to and the node run command - LEAVE ROLE OFF (terraform)
-`Cluster info` - Naming and IP for Edge and to use for SNAT. Note: I plan to make snat optional and add proxy option in the future
-`Controlplane/ETCD/WORKER info` - Naming and Network setting for each node components
-`VPN - Connection to Rancher and JumpBox` - Not production ready as kept deleting alreday define roles. Suggest manually setting up VPN for now, leveraging api/vcd-cli, or just good old plain routing.
+- `vCD Provider Info - Case Sensitive` - Basic vCD Provider Infomarmation (terraform.vcd)
+- `Catalog Image Info` - Location of Base image to build off  (terraform.vcd)
+- `Rancher Info` - Rancher Instance conencting to and the node run command - LEAVE ROLE OFF (terraform)
+- `Cluster info` - Naming and IP for Edge and to use for SNAT. Note: I plan to make snat optional and add proxy option in the future
+- `Controlplane/ETCD/WORKER info` - Naming and Network setting for each node components
+- `VPN - Connection to Rancher and JumpBox` - Not production ready as kept deleting alreday define roles. Suggest manually setting up VPN for now, leveraging api/vcd-cli, or just good old plain routing.
 
+###Sample .tfvars
+You can copy and paste this into a *.tfvars file to get you started.
 ```
 #-------------------------------------------#
 # vCD Provider Info - Case Sensitive
