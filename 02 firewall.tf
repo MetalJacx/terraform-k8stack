@@ -370,6 +370,15 @@ resource "vcd_firewall_rules" "work-in" {
     source_ip        = "any"
   }
   rule {
+    description      = "Worker Calico BGP Port"
+    policy           = "allow"
+    protocol         = "tcp"
+    destination_port = "179"
+    destination_ip   = "${var.net_work_cidr}"
+    source_port      = "any"
+    source_ip        = "any"
+  }
+  rule {
     description      = "HTTPs-Work Ingress Controller"
     policy           = "allow"
     protocol         = "tcp"
@@ -386,6 +395,24 @@ resource "vcd_firewall_rules" "work-in" {
     destination_ip   = "${var.net_work_cidr}"
     source_port      = "any"
     source_ip        = "${var.net_rancher_ip}"
+  }
+  rule {
+    description      = "Worker Weave Control Port"
+    policy           = "allow"
+    protocol         = "tcp"
+    destination_port = "6783"
+    destination_ip   = "${var.net_work_cidr}"
+    source_port      = "any"
+    source_ip        = "any"
+  }
+  rule {
+    description      = "Worker Weave Data Port"
+    policy           = "allow"
+    protocol         = "udp"
+    destination_port = "6783-6784"
+    destination_ip   = "${var.net_work_cidr}"
+    source_port      = "any"
+    source_ip        = "any"
   }
   rule {
     description      = "Etcd-Work CNI VXLAN overlay"
